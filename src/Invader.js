@@ -18,6 +18,11 @@ export default class Invader {
         ctx.drawImage(this.sprite, this.x, this.y, this.width, this.height);
     }
 
+    move(xVelocity, yVelocity){
+        this.x+=xVelocity;
+        this.y+= yVelocity;
+    }
+
     getImage(imageNumber) {
         switch (imageNumber) {
             case 1:
