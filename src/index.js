@@ -20,6 +20,7 @@ const invadersBulletController = new Bulletcontroller(canvas, 4, "white", false)
 const invaderController = new InvaderController(canvas, invadersBulletController, playerBulletController);
 
 let isGameOver = false;
+let didWin = false;
 
 function game() {
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -44,5 +45,8 @@ function checkGameOver(){
         isGameOver=true;
     }else if(invaderController.collideWith(player)){
         isGameOver = true;
+    }else if(invaderController.invadersRows.length==0){
+        isGameOver = true;
+        didWin = true;
     }
 }
