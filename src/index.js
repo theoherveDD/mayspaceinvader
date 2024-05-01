@@ -31,8 +31,8 @@ function game() {
         playerBulletController.draw(ctx);
         invadersBulletController.draw(ctx);
     }
-
     checkGameOver();
+    displayGameOver();
 }
 
 setInterval(game, 1000 / 60);
@@ -50,3 +50,15 @@ function checkGameOver(){
         didWin = true;
     }
 }
+
+function displayGameOver() {
+    if (isGameOver) {
+      let text = didWin ? "You Win" : "Game Over";
+      let textOffset = didWin ? 3.5 : 5;
+  
+      ctx.fillStyle = "white";
+      ctx.font = "70px Arial";
+      ctx.fillText(text, canvas.width / textOffset, canvas.height / 2);
+  
+    }
+  }
