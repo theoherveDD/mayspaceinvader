@@ -1,11 +1,11 @@
 import PlayerImg from '../assets/images/player.png';
 
 export default class Player {
- //   rightPressed = false;
-   // leftPressed = false;
-    //shootPressed = false;
+    rightPressed = false;
+    leftPressed = false;
+    shootPressed = false;
 
-    constructor(canvas, velocity) {
+    constructor(canvas, velocity, bulletController) {
         this.canvas = canvas;
         this.velocity = velocity;
         this.x = this.canvas.width / 2;
@@ -14,20 +14,19 @@ export default class Player {
         this.height = 48;
         this.image = new Image();
         this.image.src = PlayerImg;
-        //this.bulletController = bulletController;
+        this.bulletController = bulletController;
 
-       // document.addEventListener("keydown", this.keydown);
-        //document.addEventListener("keyup", this.keyup);
+        document.addEventListener("keydown", this.keydown);
+        document.addEventListener("keyup", this.keyup);
     }
 
     draw(ctx) {
-       // this.move();
+        this.move();
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        //this.collideWithWalls();
-        /*if (this.shootPressed) {
-            console.log("shoot");
+        this.collideWithWalls();
+        if (this.shootPressed) {
             this.bulletController.shoot(this.x + this.width / 2, this.y, 4,10);
-        }*/
+        }
 
     }
 

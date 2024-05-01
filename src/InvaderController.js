@@ -8,6 +8,9 @@ export default class InvaderController {
     defaultXVelocity = 1;
     defaultYVelocity = 1;
 
+    fireBulletTimerDefault = 100;
+    fireBulletTimer = this.fireBulletTimerDefault;
+
     moveDownTimerDefault = 30;
     moveDownTimer =this.moveDownTimerDefault;
 
@@ -23,17 +26,21 @@ export default class InvaderController {
     invadersRows=[];
     
     
-    constructor(canvas){
+    constructor(canvas, invadersBulletController, playerBulletController){
         this.canvas= canvas;
 
         this.createInvaders();
+        this.invadersBulletController = invadersBulletController;
+        this.playerBulletController=playerBulletController;
     }
 
     draw(ctx){
         this.decrementMoveDownTimer();
         this.drawInvaders(ctx);
+        this.fireBullet();
         this.updateVelocityAndDirection();
         this.resetMoveDownTimer();
+        this.collisionDetection();
     }
 
     drawInvaders(ctx){
@@ -55,6 +62,17 @@ export default class InvaderController {
                 }
             })
         })
+    }
+
+    fireBullet(){
+        this.fireBulletTimer--;
+        if(this.fireBulletTimer<=0){
+            this.fireBulletTimer = this.fireBulletTimerDefault;
+            const allInvaders = this.invadersRows.flat();
+            const invaderIndex = Math.floor(Math.random()*allInvaders.length);
+            const invader = allInvaders[invaderIndex];
+            this.invadersBulletController.shoot(invader.x+invader.width/2, invader.y,-3);
+        }
     }
 
     updateVelocityAndDirection (){
@@ -102,6 +120,17 @@ export default class InvaderController {
             return true;
         }
         return false;
+    }
+
+    collisionDetection(){
+        this.invadersRows.forEach((invaderRow)=>{
+            invaderRow.forEach((invader, invaderIndex)=>{
+                if(this.playerBulletController.collideWith(invader)){
+                    invaderRow.splice(invaderIndex, 1);
+                }
+            });
+        });
+        this.invadersRows = this.invadersRows.filter((invaderRow)=> invaderRow.length>0);
     }
 
     resetMoveDownTimer(){
