@@ -144,4 +144,8 @@ export default class InvaderController {
             this.moveDownTimer--;
         }
     }
+
+    collideWith(sprite) {
+        return this.invadersRows.flat().some((invader) => invader.collideWith(sprite));
+      }
 }

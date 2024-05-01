@@ -42,5 +42,7 @@ function checkGameOver(){
     }
     if(invadersBulletController.collideWith(player)){
         isGameOver=true;
+    }else if(invaderController.collideWith(player)){
+        isGameOver = true;
     }
 }
