@@ -20,6 +20,27 @@ export default class Player {
         document.addEventListener("keyup", this.keyup);
     }
 
+    // reset() {
+    //     this.x = this.canvas.width / 2;
+    //     this.y = this.canvas.height - 75;
+    //     this.width = 50;
+    //     this.height = 48;
+    //     this.image = new Image();
+    //     this.image.src = PlayerImg;
+    //     this.rightPressed = false;
+    //     this.leftPressed = false;
+    //     this.shootPressed = false;
+    // }
+
+    reset() {
+        this.x = this.canvas.width / 2;
+        this.y = this.canvas.height - 75;
+        this.width = 50;
+        this.height = 48;
+        this.image = new Image();
+        this.image.src = PlayerImg;
+    }
+
     draw(ctx) {
         this.move();
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);

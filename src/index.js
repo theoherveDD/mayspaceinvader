@@ -5,6 +5,9 @@ import InvaderController from './InvaderController';
 import Player from './player';
 import Bulletcontroller from './BulletController';
 
+// import victorySound from "../assets/sounds/victory.wav";
+// import gameOverSound from "../assets/sounds/gameover.wav";
+
 let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
 canvas.height = 600;
@@ -21,6 +24,7 @@ const invaderController = new InvaderController(canvas, invadersBulletController
 
 let isGameOver = false;
 let didWin = false;
+
 
 function game() {
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -53,12 +57,49 @@ function checkGameOver(){
 
 function displayGameOver() {
     if (isGameOver) {
-      let text = didWin ? "You Win" : "Game Over";
-      let textOffset = didWin ? 3.5 : 5;
-  
-      ctx.fillStyle = "white";
-      ctx.font = "70px Arial";
-      ctx.fillText(text, canvas.width / textOffset, canvas.height / 2);
-  
+        let text = didWin ? "You Win" : "Game Over";
+        let textOffset = didWin ? 3.5 : 5;
+
+        // //ajoute un son pour la victoire ou la défaite
+        // let audio = new Audio();
+        // audio.src = didWin ? victorySound : gameOverSound;
+        // audio.load();
+        // audio.oncanplaythrough = function() {
+        // audio.play();
+        // };
+
+        ctx.fillStyle = "white";
+        ctx.font = "70px Arial";
+        ctx.fillText(text, canvas.width / textOffset, canvas.height / 2);
+
+        // Vérifie si le bouton existe déjà
+        if (!document.getElementById("replayButton")) {
+            // Création du bouton de replay
+            let button = document.createElement("button");
+            button.id = "replayButton"; // Ajout d'un id au bouton
+            button.innerHTML = "Replay";
+            button.style.position = "absolute";
+            button.style.top = "50%";
+            button.style.left = "50%";
+            button.style.transform = "translate(-50%, -50%)";
+            button.style.padding = "20px";
+            button.style.fontSize = "20px";
+            button.style.backgroundColor = "red";
+            button.style.color = "white";
+            button.style.border = "none";
+            button.style.zIndex = "1000";
+
+            // Ajout de l'événement de clic au bouton
+            button.addEventListener("click", () => {
+                isGameOver = false;
+                didWin = false;
+                player.reset();
+                invaderController.reset();
+                document.body.removeChild(button); // Suppression du bouton après le clic
+            });
+
+            // Ajout du bouton au corps du document
+            document.body.appendChild(button);
+        }
     }
-  }
+}
