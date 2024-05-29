@@ -14,6 +14,8 @@ export default class InvaderController {
     moveDownTimerDefault = 30;
     moveDownTimer =this.moveDownTimerDefault;
 
+    level = 1;
+
     invadersMap = [
         [1,1,1,1,1,1,1,1,1,1],
         [1,1,1,1,1,1,1,1,1,1],
@@ -147,5 +149,10 @@ export default class InvaderController {
 
     collideWith(sprite) {
         return this.invadersRows.flat().some((invader) => invader.collideWith(sprite));
-      }
+    }
+
+    updateLevel(){
+        this.level++;
+        document.querySelector("#level").innerHTML = this.level;
+    }
 }
