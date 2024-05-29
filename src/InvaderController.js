@@ -23,6 +23,60 @@ export default class InvaderController {
         [2,2,2,2,2,2,2,2,2,2]
     ];
 
+    heartMap = [
+        [0, 0, 2, 2, 0, 0, 2, 2, 0, 0],
+        [0, 2, 3, 3, 2, 2, 3, 3, 2, 0],
+        [2, 3, 3, 3, 3, 3, 3, 3, 3, 2],
+        [2, 3, 3, 3, 3, 3, 3, 3, 3, 2],
+        [0, 2, 3, 3, 3, 3, 3, 3, 2, 0],
+        [0, 0, 2, 3, 3, 3, 3, 2, 0, 0]
+    ];
+
+    starMap = [
+        [0, 0, 0, 3, 0, 3, 0, 0, 0, 0],
+        [0, 0, 3, 3, 3, 3, 3, 0, 0, 0],
+        [0, 3, 3, 3, 3, 3, 3, 3, 0, 0],
+        [3, 3, 3, 3, 3, 3, 3, 3, 3, 0],
+        [0, 3, 3, 3, 3, 3, 3, 3, 0, 0],
+        [0, 0, 3, 3, 3, 3, 3, 0, 0, 0]
+    ];
+
+    arrowUpMap = [
+        [0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
+        [0, 0, 0, 2, 2, 2, 0, 0, 0, 0],
+        [0, 0, 2, 2, 2, 2, 2, 0, 0, 0],
+        [0, 2, 2, 2, 2, 2, 2, 2, 0, 0],
+        [2, 2, 2, 2, 2, 2, 2, 2, 2, 0],
+        [0, 0, 0, 0, 2, 0, 0, 0, 0, 0]
+    ];
+
+    smileyMap = [
+        [0, 0, 2, 2, 2, 2, 2, 2, 0, 0],
+        [0, 2, 3, 3, 2, 2, 3, 3, 2, 0],
+        [2, 3, 3, 3, 2, 2, 3, 3, 3, 2],
+        [2, 3, 2, 3, 3, 3, 3, 2, 3, 2],
+        [2, 3, 3, 3, 3, 3, 3, 3, 3, 2],
+        [0, 2, 3, 3, 3, 3, 3, 3, 2, 0]
+    ];
+
+    diamondMap = [
+        [0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
+        [0, 0, 0, 2, 3, 2, 0, 0, 0, 0],
+        [0, 0, 2, 3, 3, 3, 2, 0, 0, 0],
+        [0, 2, 3, 3, 3, 3, 3, 2, 0, 0],
+        [2, 3, 3, 3, 3, 3, 3, 3, 2, 0],
+        [0, 2, 3, 3, 3, 3, 3, 2, 0, 0]
+    ];
+    
+    waveMap = [
+        [0, 0, 2, 2, 0, 0, 2, 2, 0, 0],
+        [0, 2, 2, 3, 2, 2, 3, 2, 2, 0],
+        [2, 2, 3, 3, 3, 3, 3, 3, 2, 2],
+        [2, 3, 3, 3, 3, 3, 3, 3, 3, 2],
+        [0, 2, 3, 3, 3, 3, 3, 3, 2, 0],
+        [0, 0, 2, 2, 0, 0, 2, 2, 0, 0]
+    ];
+
     invadersRows=[];
     
     
@@ -50,8 +104,12 @@ export default class InvaderController {
         })
     }
 
-    createInvaders(){
-        this.invadersMap.forEach((row, rowIndex)=>{
+    createInvaders() {
+        const allTables = [this.invadersMap, this.heartMap, this.starMap, this.arrowUpMap, this.smileyMap, this.diamondMap, this.waveMap];
+        const rand = Math.floor(Math.random() * allTables.length);
+        const soloTable = allTables[rand];
+
+        soloTable.forEach((row, rowIndex) => {
             this.invadersRows[rowIndex] = [];
             row.forEach((invaderNumber, invaderIndex)=>{
                 if(invaderNumber>0){
