@@ -20,17 +20,7 @@ export default class Player {
         document.addEventListener("keyup", this.keyup);
     }
 
-    // reset() {
-    //     this.x = this.canvas.width / 2;
-    //     this.y = this.canvas.height - 75;
-    //     this.width = 50;
-    //     this.height = 48;
-    //     this.image = new Image();
-    //     this.image.src = PlayerImg;
-    //     this.rightPressed = false;
-    //     this.leftPressed = false;
-    //     this.shootPressed = false;
-    // }
+    // Fonction reset pour le Player
 
     reset() {
         this.x = this.canvas.width / 2;
