@@ -12,6 +12,8 @@ export default class Invader {
 
         this.sprite = new Image();
         this.sprite.src = this.getImage(imageNumber);
+
+        this.type = imageNumber;
     }
 
     draw(ctx){
