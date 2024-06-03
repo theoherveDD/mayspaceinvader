@@ -14,64 +14,8 @@ export default class InvaderController {
     moveDownTimerDefault = 30;
     moveDownTimer =this.moveDownTimerDefault;
 
-    level = 1;
-
     invadersMap = [
         [1,1,1,1,1,1,1,1,1,1]
-    ];
-
-    heartMap = [
-        [0, 0, 2, 2, 0, 0, 2, 2, 0, 0],
-        [0, 2, 3, 3, 2, 2, 3, 3, 2, 0],
-        [2, 3, 3, 3, 3, 3, 3, 3, 3, 2],
-        [2, 3, 3, 3, 3, 3, 3, 3, 3, 2],
-        [0, 2, 3, 3, 3, 3, 3, 3, 2, 0],
-        [0, 0, 2, 3, 3, 3, 3, 2, 0, 0]
-    ];
-
-    starMap = [
-        [0, 0, 0, 3, 0, 3, 0, 0, 0, 0],
-        [0, 0, 3, 3, 3, 3, 3, 0, 0, 0],
-        [0, 3, 3, 3, 3, 3, 3, 3, 0, 0],
-        [3, 3, 3, 3, 3, 3, 3, 3, 3, 0],
-        [0, 3, 3, 3, 3, 3, 3, 3, 0, 0],
-        [0, 0, 3, 3, 3, 3, 3, 0, 0, 0]
-    ];
-
-    arrowUpMap = [
-        [0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
-        [0, 0, 0, 2, 2, 2, 0, 0, 0, 0],
-        [0, 0, 2, 2, 2, 2, 2, 0, 0, 0],
-        [0, 2, 2, 2, 2, 2, 2, 2, 0, 0],
-        [2, 2, 2, 2, 2, 2, 2, 2, 2, 0],
-        [0, 0, 0, 0, 2, 0, 0, 0, 0, 0]
-    ];
-
-    smileyMap = [
-        [0, 0, 2, 2, 2, 2, 2, 2, 0, 0],
-        [0, 2, 3, 3, 2, 2, 3, 3, 2, 0],
-        [2, 3, 3, 3, 2, 2, 3, 3, 3, 2],
-        [2, 3, 2, 3, 3, 3, 3, 2, 3, 2],
-        [2, 3, 3, 3, 3, 3, 3, 3, 3, 2],
-        [0, 2, 3, 3, 3, 3, 3, 3, 2, 0]
-    ];
-
-    diamondMap = [
-        [0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
-        [0, 0, 0, 2, 3, 2, 0, 0, 0, 0],
-        [0, 0, 2, 3, 3, 3, 2, 0, 0, 0],
-        [0, 2, 3, 3, 3, 3, 3, 2, 0, 0],
-        [2, 3, 3, 3, 3, 3, 3, 3, 2, 0],
-        [0, 2, 3, 3, 3, 3, 3, 2, 0, 0]
-    ];
-    
-    waveMap = [
-        [0, 0, 2, 2, 0, 0, 2, 2, 0, 0],
-        [0, 2, 2, 3, 2, 2, 3, 2, 2, 0],
-        [2, 2, 3, 3, 3, 3, 3, 3, 2, 2],
-        [2, 3, 3, 3, 3, 3, 3, 3, 3, 2],
-        [0, 2, 3, 3, 3, 3, 3, 3, 2, 0],
-        [0, 0, 2, 2, 0, 0, 2, 2, 0, 0]
     ];
 
     invadersRows=[];
@@ -83,23 +27,6 @@ export default class InvaderController {
         this.createInvaders();
         this.invadersBulletController = invadersBulletController;
         this.playerBulletController=playerBulletController;
-    }
-    reset () {
-        this.currentDirection = MovingDirection.right;
-        this.xVelocity = 0;
-        this.yVelocity = 0;
-        this.defaultXVelocity = 1;
-        this.defaultYVelocity = 1;
-
-        this.fireBulletTimerDefault = 100;
-        this.fireBulletTimer = this.fireBulletTimerDefault;
-
-        this.moveDownTimerDefault = 30;
-        this.moveDownTimer =this.moveDownTimerDefault;
-
-        this.createInvaders();
-
-
     }
 
     draw(ctx){
@@ -118,12 +45,8 @@ export default class InvaderController {
         })
     }
 
-    createInvaders() {
-        const allTables = [this.invadersMap, this.heartMap, this.starMap, this.arrowUpMap, this.smileyMap, this.diamondMap, this.waveMap];
-        const rand = Math.floor(Math.random() * allTables.length);
-        const soloTable = allTables[rand];
-
-        soloTable.forEach((row, rowIndex) => {
+    createInvaders(){
+        this.invadersMap.forEach((row, rowIndex)=>{
             this.invadersRows[rowIndex] = [];
             row.forEach((invaderNumber, invaderIndex)=>{
                 if(invaderNumber>0){
@@ -135,6 +58,8 @@ export default class InvaderController {
             })
         })
     }
+
+    // Fonction reset pour le IvaderController
 
     reset () {
         this.currentDirection = MovingDirection.right;
@@ -150,8 +75,6 @@ export default class InvaderController {
         this.moveDownTimer =this.moveDownTimerDefault;
 
         this.createInvaders();
-
-        
     }
 
 
@@ -240,10 +163,5 @@ export default class InvaderController {
 
     collideWith(sprite) {
         return this.invadersRows.flat().some((invader) => invader.collideWith(sprite));
-    }
-
-    updateLevel(){
-        this.level++;
-        document.querySelector("#level").innerHTML = this.level;
-    }
+      }
 }
