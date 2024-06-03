@@ -5,6 +5,9 @@ import InvaderController from './InvaderController';
 import Player from './player';
 import Bulletcontroller from './BulletController';
 
+// import victorySound from "../assets/sounds/victory.wav";
+// import gameOverSound from "../assets/sounds/gameover.wav";
+
 let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
 canvas.height = 600;
@@ -21,6 +24,7 @@ const invaderController = new InvaderController(canvas, invadersBulletController
 
 let isGameOver = false;
 let didWin = false;
+
 
 function game() {
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);

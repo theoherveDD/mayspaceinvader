@@ -17,12 +17,7 @@ export default class InvaderController {
     level = 1;
 
     invadersMap = [
-        [1,1,1,1,1,1,1,1,1,1],
-        [1,1,1,1,1,1,1,1,1,1],
-        [2,2,2,3,3,3,3,2,2,2],
-        [2,2,2,3,3,3,3,2,2,2],
-        [1,1,1,1,1,1,1,1,1,1],
-        [2,2,2,2,2,2,2,2,2,2]
+        [1,1,1,1,1,1,1,1,1,1]
     ];
 
     heartMap = [
@@ -140,6 +135,27 @@ export default class InvaderController {
             })
         })
     }
+
+    reset () {
+        this.currentDirection = MovingDirection.right;
+        this.xVelocity = 0;
+        this.yVelocity = 0;
+        this.defaultXVelocity = 1;
+        this.defaultYVelocity = 1;
+    
+        this.fireBulletTimerDefault = 100;
+        this.fireBulletTimer = this.fireBulletTimerDefault;
+    
+        this.moveDownTimerDefault = 30;
+        this.moveDownTimer =this.moveDownTimerDefault;
+
+        this.createInvaders();
+
+        
+    }
+
+
+
 
     fireBullet(){
         this.fireBulletTimer--;
