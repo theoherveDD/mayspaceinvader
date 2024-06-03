@@ -59,6 +59,8 @@ export default class InvaderController {
         })
     }
 
+    // Fonction reset pour le IvaderController
+
     reset () {
         this.currentDirection = MovingDirection.right;
         this.xVelocity = 0;
@@ -73,8 +75,6 @@ export default class InvaderController {
         this.moveDownTimer =this.moveDownTimerDefault;
 
         this.createInvaders();
-
-        
     }
 
 
