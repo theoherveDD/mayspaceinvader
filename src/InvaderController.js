@@ -89,6 +89,23 @@ export default class InvaderController {
         this.invadersBulletController = invadersBulletController;
         this.playerBulletController=playerBulletController;
     }
+    reset () {
+        this.currentDirection = MovingDirection.right;
+        this.xVelocity = 0;
+        this.yVelocity = 0;
+        this.defaultXVelocity = 1;
+        this.defaultYVelocity = 1;
+
+        this.fireBulletTimerDefault = 100;
+        this.fireBulletTimer = this.fireBulletTimerDefault;
+
+        this.moveDownTimerDefault = 30;
+        this.moveDownTimer =this.moveDownTimerDefault;
+
+        this.createInvaders();
+
+
+    }
 
     draw(ctx){
         this.decrementMoveDownTimer();
