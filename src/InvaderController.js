@@ -246,4 +246,8 @@ export default class InvaderController {
         this.level++;
         document.querySelector("#level").innerHTML = this.level;
     }
+    resetLevel(){
+        this.level = 1;
+        document.querySelector("#level").innerHTML = this.level;
+    }
 }

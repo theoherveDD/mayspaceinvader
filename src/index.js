@@ -99,6 +99,7 @@ function displayGameOver() {
                 didWin = false;
                 player.reset();
                 invaderController.reset();
+                invaderController.resetLevel();
                 document.body.removeChild(button); // Suppression du bouton après le clic
             });
 
