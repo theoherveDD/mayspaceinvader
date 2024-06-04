@@ -1,4 +1,4 @@
-import { addScore } from './score';
+import { addScore, resetScore } from './score';
 
 export default class Bullet{
     constructor(canvas, x, y, velocity, bulletColor){
@@ -23,8 +23,12 @@ export default class Bullet{
             this.x<sprite.x+sprite.width &&
             this.y + this.height> sprite.y&&
             this.y <sprite.y+sprite.height){
-                console.log("colision");
-                addScore(sprite["type"]);
+                if (sprite["type"]) {
+                    console.log("colision");
+                    addScore(sprite["type"]);
+                } else {
+                    resetScore();
+                }
                 return true;
 
         }else{

@@ -11,7 +11,7 @@ export default class InvaderController {
     fireBulletTimerDefault = 100;
     fireBulletTimer = this.fireBulletTimerDefault;
 
-    moveDownTimerDefault = 30;
+    moveDownTimerDefault = 10;
     moveDownTimer =this.moveDownTimerDefault;
 
     level = 1;
@@ -219,7 +219,13 @@ export default class InvaderController {
         this.invadersRows.forEach((invaderRow)=>{
             invaderRow.forEach((invader, invaderIndex)=>{
                 if(this.playerBulletController.collideWith(invader)){
-                    invaderRow.splice(invaderIndex, 1);
+                    console.log("type : ",invader.type);
+                    if(invader.type > 1){
+                        invader.type--;
+                        invader.sprite.src = invader.getImage(invader.type);
+                    }else{
+                        invaderRow.splice(invaderIndex, 1);
+                    }
                 }
             });
         });
@@ -244,6 +250,10 @@ export default class InvaderController {
 
     updateLevel(){
         this.level++;
+        document.querySelector("#level").innerHTML = this.level;
+    }
+    resetLevel(){
+        this.level = 1;
         document.querySelector("#level").innerHTML = this.level;
     }
 }
