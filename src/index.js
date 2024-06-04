@@ -59,6 +59,18 @@ function checkGameOver(){
     }
 }
 
+function resetG() {
+
+    if (!isGameOver) {
+        return;
+    }
+    isGameOver = false;
+    didWin = false;
+    player.reset();
+    invaderController.reset();
+    console.log("test");
+}
+
 function displayGameOver() {
     if (isGameOver) {
         let text = didWin ? "You Win" : "Game Over";
@@ -77,12 +89,20 @@ function displayGameOver() {
             button.innerHTML = "Replay";
 
             button.addEventListener("click", () => {
-                isGameOver = false;
-                didWin = false;
-                player.reset();
-                invaderController.reset();
-                document.body.removeChild(button); 
+                resetG();
+                button.remove();
             });
+
+
+            document.addEventListener("keydown", (e) => {
+                if (e.code === "Enter") {
+                    resetG();
+                    if (document.getElementById("replayButton")){
+                        button.remove();
+                    }
+                }
+            });
+
             
             document.body.appendChild(button);
         }
